@@ -1,8 +1,8 @@
 # Hangman Game 🎮
 
-A simple command-line **Hangman game developed in Python**.
+A simple **Hangman game developed in Python**, available both as a command-line application and as an interactive web application built with **Streamlit**.
 
-The program randomly selects a word and asks the player to guess it letter by letter. Each incorrect answer progressively draws the hangman until the player reaches the maximum number of attempts.
+The program randomly selects a word and asks the player to guess it letter by letter. Each incorrect answer progressively draws the Hangman until the player reaches the maximum number of attempts.
 
 ---
 
@@ -10,9 +10,12 @@ The program randomly selects a word and asks the player to guess it letter by le
 
 This project was developed to practice fundamental Python programming concepts through the implementation of the classic **Hangman word guessing game**.
 
-The game runs directly in the terminal and randomly selects a word from a predefined dictionary.
+The project includes two versions:
 
-The player must guess the correct letters before reaching the maximum number of incorrect attempts.
+- A **command-line version** running directly in the terminal.
+- A **Streamlit web version** providing a more interactive and user-friendly interface.
+
+The game randomly selects a word from a predefined dictionary, and the player must guess the correct letters before reaching the maximum number of incorrect attempts.
 
 ---
 
@@ -22,25 +25,31 @@ The player must guess the correct letters before reaching the maximum number of 
 - Letter-by-letter guessing
 - Tracking of previously guessed letters
 - Progressive ASCII Hangman drawing
-- Limited number of incorrect attempts
-- Terminal-based interaction
-- Simple word dictionary
+- Maximum of six incorrect attempts
+- Input validation
+- Prevention of duplicate guesses
+- Automatic win and loss detection
+- Restart / new game option
+- Command-line interface
+- Interactive Streamlit web interface
 
 ---
 
 ## Technologies
 
 ![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-Web_App-FF4B4B?logo=streamlit&logoColor=white)
 
-The project uses only the Python standard library.
+Main technologies used:
 
-Main module used:
+- **Python**
+- **Streamlit**
+- Python `random` module
+- Streamlit `session_state`
 
-```python
-import random
-```
+The command-line version uses only the Python standard library.
 
-No external dependencies are required.
+The web version requires Streamlit.
 
 ---
 
@@ -49,9 +58,12 @@ No external dependencies are required.
 1. The program randomly selects a word from a predefined list.
 2. The hidden word is displayed using underscores.
 3. The player enters one letter at a time.
-4. Correct guesses reveal letters from the word.
+4. Correct guesses reveal the corresponding letters in the word.
 5. Incorrect guesses progressively build the Hangman figure.
-6. The game ends after six incorrect attempts or when the word is completed.
+6. Previously entered letters are tracked.
+7. Duplicate guesses are detected.
+8. The game ends after six incorrect attempts or when the complete word is guessed.
+9. The player can start a new game at any time.
 
 Example:
 
@@ -61,12 +73,12 @@ Welcome to Hangman
 _ _ _ _ _
 
 Letters guessed so far:
-a e
+A E
 
-Guess a letter: l
+Guess a letter: L
 ```
 
-The Hangman evolves after incorrect guesses:
+The Hangman progressively evolves after incorrect guesses:
 
 ```text
 +---+
@@ -78,15 +90,58 @@ The Hangman evolves after incorrect guesses:
 
 ---
 
+## Web Version with Streamlit
+
+The Streamlit version provides an interactive browser-based interface.
+
+It includes:
+
+- Visual representation of the hidden word
+- Interactive letter input
+- Display of previously guessed letters
+- Wrong guess counter
+- Dynamic Hangman drawing
+- Success message when the word is found
+- Game-over message when the maximum number of attempts is reached
+- New Game button
+
+Streamlit's `session_state` is used to preserve the game state between user interactions.
+
+---
+
 ## Project Structure
 
 ```text
 Hangman/
 │
-└── hangmangame.py
+├── app.py
+├── hangmangame.py
+├── requirements.txt
+├── README.md
+└── .gitignore
 ```
 
-`hangmangame.py` contains the complete game logic.
+### Files
+
+`hangmangame.py`
+
+Contains the original command-line version of the Hangman game.
+
+`app.py`
+
+Contains the Streamlit web application.
+
+`requirements.txt`
+
+Contains the Python dependencies required to run the Streamlit application.
+
+`README.md`
+
+Contains the project documentation.
+
+`.gitignore`
+
+Prevents unnecessary local and environment files from being pushed to GitHub.
 
 ---
 
@@ -104,13 +159,19 @@ Navigate to the project directory:
 cd Hangman
 ```
 
+Install the required dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
 ---
 
-## Run the Game
+## Run the Command-Line Version
 
 Make sure Python is installed on your computer.
 
-Then run:
+Run:
 
 ```bash
 python hangmangame.py
@@ -124,9 +185,43 @@ python3 hangmangame.py
 
 ---
 
+## Run the Streamlit Version
+
+To launch the web application:
+
+```bash
+streamlit run app.py
+```
+
+Streamlit will start a local server and open the application in your browser.
+
+The application is usually available at:
+
+```text
+http://localhost:8501
+```
+
+---
+
+## Requirements
+
+The `requirements.txt` file contains:
+
+```text
+streamlit
+```
+
+Install the dependencies with:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
 ## Concepts Practiced
 
-This project demonstrates basic Python concepts including:
+This project demonstrates several Python and application development concepts, including:
 
 - Variables
 - Lists
@@ -136,8 +231,36 @@ This project demonstrates basic Python concepts including:
 - User input
 - String manipulation
 - Random selection
-- Basic game logic
+- Game logic
 - ASCII-based terminal output
+- Input validation
+- State management
+- Streamlit components
+- Web application development with Python
+- Session management using `st.session_state`
+
+---
+
+## Project Evolution
+
+The project was initially developed as a simple terminal-based Python game.
+
+It was then extended into an interactive web application using **Streamlit**.
+
+This evolution demonstrates how a basic Python project can be transformed into a user-friendly web application while keeping the original game logic.
+
+```text
+Python CLI
+    │
+    ▼
+Game Logic
+    │
+    ▼
+Streamlit Interface
+    │
+    ▼
+Interactive Web Application
+```
 
 ---
 
@@ -145,15 +268,32 @@ This project demonstrates basic Python concepts including:
 
 Future improvements could include:
 
-- Better validation of user input
-- Prevention of duplicate guesses
 - Difficulty levels
 - Larger word dictionaries
 - Word categories
 - Score system
-- Replay option
-- Graphical interface
-- Improved win and lose messages
+- Player statistics
+- Hint system
+- Timer
+- Multiplayer mode
+- Leaderboard
+- Improved graphical Hangman representation
+- Sound effects
+- Deployment on Streamlit Community Cloud
+
+---
+
+## Deployment
+
+The Streamlit application can be deployed using **Streamlit Community Cloud**.
+
+Once deployed, the application can be played directly from a browser without installing Python locally.
+
+A live demo link can then be added here:
+
+```text
+Live Demo: Coming soon
+```
 
 ---
 
